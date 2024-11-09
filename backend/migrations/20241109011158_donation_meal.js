@@ -10,8 +10,8 @@ exports.up = function (knex) {
       table.text("meal_description").notNullable();
       table.integer("quantity").notNullable().checkPositive(); // Adding a custom check
       table.text("pickup_location").notNullable();
-      table.decimal("latitude", 9, 6);
-      table.decimal("longitude", 9, 6);
+      table.string("latitude");
+      table.string("longitude");
       table.timestamp("expiry_date").notNullable();
       table.timestamp("pickup_time").defaultTo(knex.fn.now());
       table.boolean("is_claimed").defaultTo(false);

@@ -13,7 +13,7 @@ module.exports.createDonationMeal = async (req, res) => {
     is_claimed,
     claimed_by,
   } = req.body;
-
+  
   // Validate required fields
   if (
     !donor_id ||
@@ -24,11 +24,12 @@ module.exports.createDonationMeal = async (req, res) => {
   ) {
     return res.status(400).json({ error: "Required fields are missing" });
   }
-
+  
+  console.log(req.body);
   try {
     // Insert the new donation meal into the database
-    const [newMealId] = await db("donation_meal")
-      .insert({
+    const newMealId = await db("donation_meal")
+      .insert({donor_id,
         meal_description,
         quantity,
         pickup_location,
@@ -39,7 +40,6 @@ module.exports.createDonationMeal = async (req, res) => {
         is_claimed: is_claimed || false,
         claimed_by: claimed_by || null,
       });
-      console.log(newMealId);
       
     res.status(201).json({
       message: "Donation meal created successfully",
