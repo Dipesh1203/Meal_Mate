@@ -69,15 +69,21 @@ export default function Signup() {
           "http://localhost:5000/auth/signup",
           formData
         );
-
+        
         if (response.status === 201) {
-          dispatch(signInSuccess(formData));
+          dispatch(signInSuccess(response.data.users));
           toast.success("You are successfully signed up");
-          navigate("/analytics");
+          console.log(entity);
+          
+          if(entity==="NGO"){
+            navigate("profile/getMeals");
+          }else 
+          navigate("profile/analytics");
         }
       } catch (error) {
         setErr(error.response?.data?.error || "Server error");
         dispatch(signInFailure(error.message));
+        navigate("/landing")
       }
     } else {
       setErr("Please fill in all required fields");

@@ -16,13 +16,8 @@ export default function DividedLogin() {
 
   return (
     <div className="font-sans h-screen overflow-hidden p-8 flex flex-col justify-center items-center">
-      <nav className="flex justify-between items-center w-full max-w-5xl mb-4">
-        <img src="./logo.png" alt="Platform Logo" className="w-40 h-auto mr-4" />
-        <ul className="flex gap-8 text-gray-600 font-semibold text-lg">
-          <li className="cursor-pointer">About</li>
-          <li className="cursor-pointer">How It Works</li>
-          <li className="cursor-pointer">Contact</li>
-        </ul>
+      <nav className="flex justify-center items-center w-full max-w-5xl mb-4">
+        <img src="./logo.png" alt="Platform Logo" className="w-52 h-auto mr-4" />
       </nav>
       <div className="flex justify-center items-center w-full max-w-5xl">
         <div className="w-1/2 p-8 text-center bg-green-50 border-r border-gray-200">

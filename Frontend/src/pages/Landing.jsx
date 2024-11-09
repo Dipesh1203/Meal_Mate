@@ -19,13 +19,7 @@ export default function Landing() {
     <div className="font-sans bg-gradient-to-br from-green-50 to-green-300 h-screen overflow-hidden p-8 flex flex-col justify-center items-center">
       {/* Navigation */}
       <nav className="flex justify-between items-center w-full max-w-5xl mb-4">
-        <div className="flex items-center">
-          <img
-            src="./logo.png"
-            alt="Platform Logo"
-            className="w-40 h-auto mr-4"
-          />
-        </div>
+       
         <ul className="flex gap-8 text-gray-600 font-semibold text-lg">
           <li className="cursor-pointer">Our Mission</li>
           <li className="cursor-pointer">Solutions</li>
