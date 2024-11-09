@@ -3,6 +3,7 @@ const cors = require("cors"); // Import cors
 require("dotenv").config();
 const auth = require("./routers/auth.routes");
 const provider = require("./routers/provider.routes");
+const providerList = require("./routers/get.routes");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 // Routes
 app.use("/auth", auth);
 app.use("/provider", provider);
+app.use("/provider_list", providerList);
 
 const PORT = process.env.PORT || 5000;
 

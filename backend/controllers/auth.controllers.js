@@ -1,8 +1,8 @@
-const { db } = require("../db/index.js"); 
+const { db } = require("../db/index.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_SECRET; 
+const JWT_SECRET = process.env.JWT_SECRET;
 
 module.exports.signup = async (req, res) => {
   const {
@@ -30,7 +30,7 @@ module.exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert new users
-    await db("users").insert({
+    const users = await db("users").insert({
       email,
       phone,
       entity_name,
@@ -42,7 +42,7 @@ module.exports.signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully", users });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
