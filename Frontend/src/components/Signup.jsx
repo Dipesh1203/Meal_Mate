@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -13,10 +13,30 @@ export default function Signup() {
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.user);
 
+  // Fetch user's location on component mount
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setFormData((prevData) => ({
+            ...prevData,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          }));
+        },
+        (error) => {
+          console.error("Error fetching location:", error);
+          setErr("Unable to fetch location. Please enter manually.");
+        }
+      );
+    } else {
+      setErr("Geolocation is not supported by your browser.");
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, phone, entity_name, address, latitude, longitude, legal_identity, entity, password } = formData;
-
 
     if (email && phone && entity_name && address && latitude && longitude && legal_identity && entity && password) {
       dispatch(signInStart());
@@ -101,6 +121,7 @@ export default function Signup() {
             type="text"
             name="latitude"
             placeholder="Latitude"
+            value={formData.latitude || ""}
             className="w-full p-2 border rounded"
             onChange={handleChange}
             required
@@ -112,6 +133,7 @@ export default function Signup() {
             type="text"
             name="longitude"
             placeholder="Longitude"
+            value={formData.longitude || ""}
             className="w-full p-2 border rounded"
             onChange={handleChange}
             required
