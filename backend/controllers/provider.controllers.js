@@ -27,9 +27,8 @@ module.exports.createDonationMeal = async (req, res) => {
 
   try {
     // Insert the new donation meal into the database
-    const [newMealId] = await db("donation_meal")
+    const newMealId = await db("donation_meal")
       .insert({
-        donor_id,
         meal_description,
         quantity,
         pickup_location,
@@ -39,9 +38,9 @@ module.exports.createDonationMeal = async (req, res) => {
         pickup_time: pickup_time || knex.fn.now(), // Default to current time if not provided
         is_claimed: is_claimed || false,
         claimed_by: claimed_by || null,
-      })
-      .returning("donation_meal_id");
-
+      });
+      console.log(newMealId);
+      
     res.status(201).json({
       message: "Donation meal created successfully",
       donation_meal_id: newMealId,

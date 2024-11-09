@@ -21,7 +21,7 @@ export default function Signup() {
     if (email && phone && entity_name && address && latitude && longitude && legal_identity && entity && password) {
       dispatch(signInStart());
       try {
-        const response = await axios.post("http://localhost:5000/auth/signup", formData);
+        const response = await axios.post("/api/auth/signup", formData);
 
         if (response.status === 201) {
           dispatch(signInSuccess(formData));

@@ -16,7 +16,7 @@ export default function Sidebar() {
   const dispatch =useDispatch()
 
   const handleLogout = () => {
-    dispatch(signOutSuccess());a
+    dispatch(signOutSuccess());
     navigate('/landing');
     
   };
@@ -82,7 +82,7 @@ export default function Sidebar() {
           </li>
           <li>
             <NavLink
-              to="/diary"
+              to="/donation-center"
               className={({ isActive }) =>
                 `mb-2 flex items-center p-2 rounded-xl transition-colors duration-300 ${
                   isActive ? 'bg-[#2d5776] text-[#ffffff]' : 'hover:bg-[#57819f] hover:text-[#ffffff]'
