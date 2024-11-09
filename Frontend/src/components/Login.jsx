@@ -7,7 +7,7 @@ import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSli
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from 'react-toastify';
 
-export default function Login({ handleSignupOpen }) {
+export default function Login() {
   const [formData, setFormData] = useState({});
   const [err, setErr] = useState("");
   const dispatch = useDispatch();
@@ -89,11 +89,6 @@ export default function Login({ handleSignupOpen }) {
           </button>
         </form>
         
-        <div className="mt-4 text-center">
-          <button onClick={handleSignupOpen} className="text-blue-500">
-            Don't have an account? Signup
-          </button>
-        </div>
         <div className="mt-4 flex justify-between text-sm text-gray-500 gap-6">
           <a href="#">Terms & Conditions</a>
           <a href="#">Support</a>
