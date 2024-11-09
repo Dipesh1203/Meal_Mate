@@ -7,6 +7,7 @@ exports.up = function (knex) {
     .createTable("donation_meal", (table) => {
       table.increments("donation_meal_id").primary();
       table.integer("donor_id").notNullable();
+      table.string("provider_name").notNullable();
       table.text("meal_description").notNullable();
       table.integer("quantity").notNullable().checkPositive(); // Adding a custom check
       table.text("pickup_location").notNullable();
