@@ -1,8 +1,8 @@
-const { db } = require("../db/index.js"); // Ensure knex instance is correctly imported
+const { db } = require("../db/index.js"); 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_SECRET; // Get JWT secret from environment variables
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 module.exports.signup = async (req, res) => {
   const {
@@ -18,7 +18,6 @@ module.exports.signup = async (req, res) => {
   } = req.body;
 
   try {
-    // Check if users already exists
     const existingUser = await db("users").where({ email }).first();
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
