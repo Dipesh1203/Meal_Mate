@@ -1,6 +1,6 @@
 const { db } = require("../db/index.js");
 
-module.exports.getDonationMeal = async (req, res) => {
+(module.exports.getDonationMeal = async (req, res) => {
   try {
     const { donor_id, is_claimed } = req.query;
     let query = db("donation_meal").select("*");
@@ -16,4 +16,13 @@ module.exports.getDonationMeal = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Error fetching donation meals" });
   }
-};
+}),
+  (module.exports.getAllDonations = async (req, res) => {
+    try {
+      const allDonations = await db("donation_meal").select("*");
+      res.status(200).json(allDonations);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error fetching all donations" });
+    }
+  });
