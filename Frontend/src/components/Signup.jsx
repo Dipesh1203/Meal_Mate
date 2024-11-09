@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { signInFailure, signInStart, signInSuccess } from "../redux/user/userSlice";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-toastify";
 
@@ -36,12 +40,35 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, phone, entity_name, address, latitude, longitude, legal_identity, entity, password } = formData;
+    const {
+      email,
+      phone,
+      entity_name,
+      address,
+      latitude,
+      longitude,
+      legal_identity,
+      entity,
+      password,
+    } = formData;
 
-    if (email && phone && entity_name && address && latitude && longitude && legal_identity && entity && password) {
+    if (
+      email &&
+      phone &&
+      entity_name &&
+      address &&
+      latitude &&
+      longitude &&
+      legal_identity &&
+      entity &&
+      password
+    ) {
       dispatch(signInStart());
       try {
-        const response = await axios.post("http://localhost:5000/auth/signup", formData);
+        const response = await axios.post(
+          "http://localhost:5000/auth/signup",
+          formData
+        );
 
         if (response.status === 201) {
           dispatch(signInSuccess(formData));
@@ -70,7 +97,10 @@ export default function Signup() {
   return (
     <div className="bg-slate-50 text-slate-700 p-6 rounded-lg shadow-lg w-full max-w-2xl mx-auto">
       <h2 className="text-3xl font-bold mb-4">Sign Up</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+      >
         <div>
           <label className="block text-gray-700">Email</label>
           <input
