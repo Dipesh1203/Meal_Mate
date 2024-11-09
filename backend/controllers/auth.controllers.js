@@ -1,4 +1,4 @@
-const db = require("../db/index.js"); // Ensure knex instance is correctly imported
+const { db } = require("../db/index.js"); // Ensure knex instance is correctly imported
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -22,6 +22,9 @@ module.exports.signup = async (req, res) => {
     const existingUser = await db("user").where({ email }).first();
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
+    }
+    if (!password) {
+      return res.status(400).json({ error: "Password is required" });
     }
 
     // Hash password
