@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function DonationMeal() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ export default function DonationMeal() {
     pickup_time: ''  // Optional, leave blank if not necessary
   });
 
+  const donor_id = useSelector((state=>state.currentUser.id));
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -19,7 +22,7 @@ export default function DonationMeal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/provider/donation-center/donation-meal', {
+      const response = await fetch(`http://localhost:5000/provider/donation-center/donation-meal?${donor_id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -42,6 +45,16 @@ export default function DonationMeal() {
     <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Donate a Meal</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col">
+          <label className="text-gray-600 font-medium mb-1">Meal Description</label>
+          <textarea
+            name="meal_description"
+            value={formData.meal_description}
+            onChange={handleChange}
+            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+          />
+        </div>
         <div className="flex flex-col">
           <label className="text-gray-600 font-medium mb-1">Meal Description</label>
           <textarea
