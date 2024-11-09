@@ -27,7 +27,7 @@ module.exports.createDonationMeal = async (req, res) => {
 
   try {
     // Insert the new donation meal into the database
-    const newMealId = await db("donation_meal")
+    const [newMealId] = await db("donation_meal")
       .insert({
         meal_description,
         quantity,
