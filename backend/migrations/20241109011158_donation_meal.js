@@ -16,6 +16,7 @@ exports.up = function (knex) {
       table.timestamp("expiry_date").notNullable();
       table.timestamp("pickup_time").defaultTo(knex.fn.now());
       table.boolean("is_claimed").defaultTo(false);
+      table.boolean("is_reserved").defaultTo(false);
       table.integer("claimed_by");
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table.timestamp("updated_at").defaultTo(knex.fn.now());
