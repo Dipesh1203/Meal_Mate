@@ -19,7 +19,7 @@ export default function App() {
         <Route path='/landing' element={<ProtectedRoute> <Landing/></ProtectedRoute>}/>
         <Route path='/login' element={<ProtectedRoute> <DividedLogin/></ProtectedRoute>}/>
 
-        {/* <Route element={<PrivateRoute />}> */}
+        <Route element={<PrivateRoute />}>
 
         <Route path='/analytics' element={<Analytics/>}/>
         <Route path='/profile' element={<Profile/>}/>
@@ -28,7 +28,7 @@ export default function App() {
         <Route path='/' element={<Test/>}/>
        
 
-        {/* </Route> */}
+        </Route>
 
 
       </Routes>

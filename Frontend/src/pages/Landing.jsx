@@ -37,9 +37,9 @@ export default function Landing() {
       <div className="flex justify-between items-center w-full max-w-5xl">
         <div className="relative w-80">
           <img
-            src="./Food_WastePlatformLanding.png"
+            src="./ffw.png"
             alt="Food Waste Platform"
-            className="w-full h-auto"
+            className=" h-96"
           />
         </div>
 
