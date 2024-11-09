@@ -53,15 +53,30 @@ exports.divideDonation = async (req, res) => {
 };
 exports.updateDonationClaimStatus = async (req, res) => {
   try {
-    const { donation_meal_id } = req.body;
+    const { donation_meal_id } = req.params; // ID of the donation meal
+    const { id } = req.body; // ID of the user claiming the meal
+
+    const updatedMeal = await db("donation_meal")
+      .where({ donation_meal_id })
+      .update({
+        claimed_by: id,
+        is_claimed: true,
+      })
+      .returning("*");
+
+    // Check if the meal was found and updated
+    if (updatedMeal.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "Donation meal not found or already claimed" });
+    }
 
     res.status(200).json({
-      message: "Donation claim status updated successfully",
-      donation_meal_reserved: reserveData,
-      donation_meal_rem: remData,
+      message: "Donation meal claimed successfully",
+      donation_meal: updatedMeal[0],
     });
   } catch (error) {
-    console.error("Error updating donation claim status:", error);
+    console.error("Error claiming donation meal:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
