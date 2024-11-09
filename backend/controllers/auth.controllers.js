@@ -30,17 +30,20 @@ module.exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert new users
-    const users = await db("users").insert({
-      email,
-      phone,
-      entity_name,
-      address,
-      latitude,
-      longitude,
-      legal_identity,
-      entity,
-      password: hashedPassword,
-    });
+    const [users] = await db("users")
+      .insert({
+        email,
+        phone,
+        entity_name,
+        address,
+        latitude,
+        longitude,
+        legal_identity,
+        entity,
+        password: hashedPassword,
+      })
+      .returning("*");
+    console.log(users);
 
     res.status(201).json({ message: "User registered successfully", users });
   } catch (error) {
