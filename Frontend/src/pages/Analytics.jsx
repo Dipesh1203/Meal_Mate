@@ -1,10 +1,18 @@
-import React from 'react';
-import ForecastChart from '../components/analytics.jsx'
+import React from "react";
+import ForecastChart from "../components/analytics.jsx";
 
 const forecastData = {
   forecast_dates: [
-    "2023-11-01", "2023-11-02", "2023-11-03", "2023-11-04", "2023-11-05",
-    "2023-11-06", "2023-11-07", "2023-11-08", "2023-11-09", "2023-11-10"
+    "2023-11-01",
+    "2023-11-02",
+    "2023-11-03",
+    "2023-11-04",
+    "2023-11-05",
+    "2023-11-06",
+    "2023-11-07",
+    "2023-11-08",
+    "2023-11-09",
+    "2023-11-10",
   ],
   confidence_intervals: [
     { lower: 76.67, upper: 133.09 },
@@ -16,8 +24,8 @@ const forecastData = {
     { lower: 81.68, upper: 138.02 },
     { lower: 71.48, upper: 140.34 },
     { lower: 76.13, upper: 144.71 },
-    { lower: 93.46, upper: 162.10 }
-  ]
+    { lower: 93.46, upper: 162.1 },
+  ],
 };
 
 function App() {
