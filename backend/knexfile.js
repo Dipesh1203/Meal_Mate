@@ -7,7 +7,7 @@ module.exports = {
   development: {
     client: "postgresql",
     connection:
-      "postgresql://neondb_owner:N3YcitP5xrQX@ep-raspy-breeze-a5kvvdt3.us-east-2.aws.neon.tech/neondb?sslmode=require",
+      "postgresql://food_surplus_managment_owner:vgldyJ85ZVsa@ep-spring-cell-a5ntaxmz.us-east-2.aws.neon.tech/food_surplus_managment?sslmode=require",
     pool: {
       min: 2,
       max: 10,
