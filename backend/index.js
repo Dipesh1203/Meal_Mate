@@ -4,6 +4,7 @@ require("dotenv").config();
 const auth = require("./routers/auth.routes");
 const provider = require("./routers/provider.routes");
 const providerList = require("./routers/get.routes");
+const reciver = require("./routers/reciver.routes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/auth", auth);
 app.use("/provider", provider);
 app.use("/provider_list", providerList);
+app.use("/reciver", reciver);
 
 const PORT = process.env.PORT || 5000;
 

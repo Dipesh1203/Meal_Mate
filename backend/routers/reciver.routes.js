@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const providerController = require("../controllers/provider.controllers.js");
+const providerController = require("../controllers/reciver.controllers");
 
 router
-  .route("/donation-center/donation-meal")
-  .post(providerController.createDonationMeal);
+  .route("/donation-center/reserve_meal")
+  .put(providerController.divideDonation);
+router
+  .route("/donation-center/verify")
+  .put(providerController.updateDonationClaimStatus);
 
 module.exports = router;
