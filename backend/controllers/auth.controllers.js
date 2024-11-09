@@ -18,8 +18,8 @@ module.exports.signup = async (req, res) => {
   } = req.body;
 
   try {
-    // Check if user already exists
-    const existingUser = await db("user").where({ email }).first();
+    // Check if users already exists
+    const existingUser = await db("users").where({ email }).first();
     if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
     }
@@ -30,8 +30,8 @@ module.exports.signup = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert new user
-    await db("user").insert({
+    // Insert new users
+    await db("users").insert({
       email,
       phone,
       entity_name,
@@ -54,20 +54,20 @@ module.exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find user by email
-    const user = await db("user").where({ email }).first();
-    if (!user) {
+    // Find users by email
+    const users = await db("users").where({ email }).first();
+    if (!users) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
 
     // Compare provided password with hashed password in database
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, users.password);
     if (!isPasswordValid) {
       return res.status(400).json({ error: "Invalid credentials" });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+    const token = jwt.sign({ id: users.id, email: users.email }, JWT_SECRET, {
       expiresIn: "1h",
     });
 
