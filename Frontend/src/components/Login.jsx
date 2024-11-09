@@ -1,13 +1,11 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { app } from '../firebase';
 import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from 'react-toastify';
 
-export default function Login({ handleSignupOpen }) {
+export default function Login() {
   const [formData, setFormData] = useState({});
   const [err, setErr] = useState("");
   const dispatch = useDispatch();
@@ -26,22 +24,32 @@ export default function Login({ handleSignupOpen }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const auth = getAuth(app);
     const { email, password } = formData;
 
     if (email && password) {
       dispatch(signInStart());
 
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+        // Hit the backend API for login
+        const response = await fetch('http://localhost:5000/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
 
-        dispatch(signInSuccess({ email: user.email, uid: user.uid }));
-        toast.success("You're Successfully Logged In");
-        navigate('/');
+        if (response.ok) {
+          const data = await response.json();
+          dispatch(signInSuccess(data.users)); // Dispatch user data to Redux
+          toast.success("You're Successfully Logged In");
+          navigate('/');
+        } else {
+          const errorData = await response.json();
+          setErr(errorData.error || "An error occurred");
+          dispatch(signInFailure(errorData.error));
+        }
       } catch (error) {
         dispatch(signInFailure(error.message));
-        setErr(error.message);
+        setErr("Server error, please try again later.");
       }
     } else {
       setErr('Please fill in all fields');
@@ -83,17 +91,12 @@ export default function Login({ handleSignupOpen }) {
             type='submit'
             onClick={handleSubmit}
             className="w-full bg-gradient-to-r from-purple-400 to-blue-500 text-white p-2 rounded shadow flex justify-center items-center hover:opacity-95"
-            disabled={loading} // Disable button when loading is true
+            disabled={loading}
           >
             {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
           </button>
         </form>
         
-        <div className="mt-4 text-center">
-          <button onClick={handleSignupOpen} className="text-blue-500">
-            Don't have an account? Signup
-          </button>
-        </div>
         <div className="mt-4 flex justify-between text-sm text-gray-500 gap-6">
           <a href="#">Terms & Conditions</a>
           <a href="#">Support</a>

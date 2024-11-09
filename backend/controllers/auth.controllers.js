@@ -66,13 +66,13 @@ module.exports.login = async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign(
-      { id: users.id, entity: users.entity, email: users.email },
-      JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
-    );
+    // const token = jwt.sign(
+    //   { id: users.id, entity: users.entity, email: users.email },
+    //   JWT_SECRET,
+    //   {
+    //     expiresIn: "1h",
+    //   }
+    // );
 
     res.json({ message: "Login successful", users });
   } catch (error) {

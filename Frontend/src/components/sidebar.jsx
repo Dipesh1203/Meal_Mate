@@ -8,22 +8,17 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SavingsIcon from '@mui/icons-material/Savings';
 import BookIcon from '@mui/icons-material/Book';
-import { getAuth, signOut } from "firebase/auth";
-import { signInSuccess } from '../redux/user/userSlice';
+import { signInSuccess, signOutSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const auth = getAuth();
   const dispatch =useDispatch()
 
   const handleLogout = () => {
-    signOut(auth).then(() => {
-        dispatch(signInSuccess());
-      navigate('/landing');
-    }).catch((error) => {
-      console.error("Error signing out: ", error);
-    });
+    dispatch(signOutSuccess());a
+    navigate('/landing');
+    
   };
 
   return (
@@ -69,7 +64,7 @@ export default function Sidebar() {
               }
             >
               <LightbulbIcon className="mr-2" />
-              Tips & Suggestions
+              Inventary
             </NavLink>
           </li>
           <li>
@@ -82,7 +77,7 @@ export default function Sidebar() {
               }
             >
               <SavingsIcon className="mr-2" />
-              Your Food_Management
+              Meal Planning
             </NavLink>
           </li>
           <li>
@@ -95,7 +90,7 @@ export default function Sidebar() {
               }
             >
               <BookIcon className="mr-2" />
-              Diary
+              Donation Center
             </NavLink>
           </li>
         </ul>
