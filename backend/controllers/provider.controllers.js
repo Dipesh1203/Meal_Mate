@@ -1,4 +1,4 @@
-const { db } = require("../db/index.js"); // Ensure knex instance is correctly imported
+const { db } = require("../db/index.js");
 
 module.exports.createDonationMeal = async (req, res) => {
   const {
