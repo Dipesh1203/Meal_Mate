@@ -20,7 +20,7 @@ export default function MapComponent() {
           // Add OpenStreetMap tiles
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-          }).addTo(leafletMap);
+          }).addTo(leafletMap); 
 
           // Add a marker to the user's location
           const marker = L.marker([latitude, longitude]).addTo(leafletMap);
