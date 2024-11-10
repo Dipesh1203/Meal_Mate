@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 
 export default function DonationMeal() {
   const donor_id = useSelector((state) => state.user.currentUser.id);
-  const {latitude,longitude,address} = useSelector((state) => state.user.currentUser);
+  const { latitude, longitude, address, entity_name } = useSelector(
+    (state) => state.user.currentUser
+  );
   console.log(address);
-  
+
   const [formData, setFormData] = useState({
     donor_id: donor_id,
     meal_description: "",
@@ -14,6 +16,7 @@ export default function DonationMeal() {
     pickup_location: "",
     latitude: latitude,
     longitude: longitude,
+    provider_name: entity_name,
     expiry_date: "",
     pickup_time: "", // Optional, leave blank if not necessary
   });
@@ -95,8 +98,6 @@ export default function DonationMeal() {
             required
           />
         </div>
-
- 
 
         <div className="flex flex-col">
           <label className="text-gray-600 font-medium mb-1">Expiry Date</label>
