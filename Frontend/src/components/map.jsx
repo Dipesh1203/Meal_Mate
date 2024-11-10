@@ -20,11 +20,10 @@ export default function MapComponent() {
           // Add OpenStreetMap tiles
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-          }).addTo(leafletMap);
+          }).addTo(leafletMap); 
 
-          // Add a marker to the user's location
           const marker = L.marker([latitude, longitude]).addTo(leafletMap);
-          marker.bindPopup("You are here").openPopup();
+          marker.bindPopup("Go here for pickup").openPopup();
         },
         (error) => {
           console.error("Error fetching location:", error);
@@ -40,8 +39,7 @@ export default function MapComponent() {
       <div id="map" style={{ height: "400px", width: "100%" }}></div>
       {location.latitude && location.longitude && (
         <div style={{ marginTop: "10px" }}>
-          <strong>Your Location:</strong> <br />
-          Latitude: {location.latitude}, Longitude: {location.longitude}
+          <strong>Hotel Location</strong> <br />
         </div>
       )}
     </div>

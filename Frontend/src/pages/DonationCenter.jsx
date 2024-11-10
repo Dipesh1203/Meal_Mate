@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function DonationMeal() {
   const donor_id = useSelector((state) => state.user.currentUser.id);
+  const {latitude,longitude,address} = useSelector((state) => state.user.currentUser);
+  console.log(address);
+  
   const [formData, setFormData] = useState({
     donor_id: donor_id,
     meal_description: "",
     quantity: "",
     pickup_location: "",
-    latitude: "",
-    longitude: "",
+    latitude: latitude,
+    longitude: longitude,
     expiry_date: "",
     pickup_time: "", // Optional, leave blank if not necessary
   });
@@ -34,13 +38,13 @@ export default function DonationMeal() {
 
       const result = await response.json();
       if (response.ok) {
-        alert("Donation meal created successfully!");
+        toast.success("Donation meal created successfully!");
       } else {
-        alert(`Failed to create donation meal: ${result.error}`);
+        toast.error(`Failed to create donation meal: ${result.error}`);
       }
     } catch (error) {
       console.error(error);
-      alert("An error occurred while creating the donation meal.");
+      toast.error("An error occurred while creating the donation meal.");
     }
   };
 
@@ -92,31 +96,7 @@ export default function DonationMeal() {
           />
         </div>
 
-        <div className="flex flex-col">
-          <label className="text-gray-600 font-medium mb-1">Latitude</label>
-          <input
-            type="number"
-            name="latitude"
-            value={formData.latitude}
-            onChange={handleChange}
-            step="0.000001"
-            placeholder="e.g., 12.9716"
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label className="text-gray-600 font-medium mb-1">Longitude</label>
-          <input
-            type="number"
-            name="longitude"
-            value={formData.longitude}
-            onChange={handleChange}
-            step="0.000001"
-            placeholder="e.g., 77.5946"
-            className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-        </div>
+ 
 
         <div className="flex flex-col">
           <label className="text-gray-600 font-medium mb-1">Expiry Date</label>

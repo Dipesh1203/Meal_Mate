@@ -61,19 +61,6 @@ export default function Sidebar() {
               </li>
               <li>
                 <NavLink
-                  to="provider/tipsandsuggestions"
-                  className={({ isActive }) =>
-                    `mb-2 flex items-center p-2 rounded-xl transition-colors duration-300 ${
-                      isActive ? 'bg-[#2d5776] text-[#ffffff]' : 'hover:bg-[#57819f] hover:text-[#ffffff]'
-                    }`
-                  }
-                >
-                  <LightbulbIcon className="mr-2" />
-                  Inventory
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to="provider/Food_Management"
                   className={({ isActive }) =>
                     `mb-2 flex items-center p-2 rounded-xl transition-colors duration-300 ${
@@ -82,7 +69,7 @@ export default function Sidebar() {
                   }
                 >
                   <SavingsIcon className="mr-2" />
-                  Meal Planning
+                  Meal Planning and Alerts
                 </NavLink>
               </li>
               <li>

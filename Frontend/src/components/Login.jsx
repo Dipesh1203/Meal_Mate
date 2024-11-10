@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -5,7 +6,7 @@ import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSli
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from 'react-toastify';
 
-export default function Login() {
+export default function Login({ role }) {  // Accept role as a prop
   const [formData, setFormData] = useState({});
   const [err, setErr] = useState("");
   const dispatch = useDispatch();
@@ -30,11 +31,10 @@ export default function Login() {
       dispatch(signInStart());
 
       try {
-        // Hit the backend API for login
         const response = await fetch('http://localhost:5000/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password})
+          body: JSON.stringify({ email, password })
         });
 
         if (response.ok) {
@@ -59,7 +59,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center">
       <div className="bg-slate-50 text-slate-700 p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-2">Login</h2>
+        <h2 className="text-3xl font-bold mb-2">Login as {role}</h2>  {/* Display role-specific header */}
         <p className="mb-4">Glad you're back!</p>
         <form>
           <div className="mb-4">

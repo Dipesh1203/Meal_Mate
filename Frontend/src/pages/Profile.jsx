@@ -83,11 +83,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Map Section */}
-      <div className="w-full max-w-xl">
-        <h3 className="text-lg font-semibold text-gray-700 text-center mb-4">Location on Map</h3>
-        <MapComponent /> {/* Add the MapComponent */}
-      </div>
+    
     </div>
   );
 }

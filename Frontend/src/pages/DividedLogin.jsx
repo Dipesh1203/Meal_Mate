@@ -23,7 +23,7 @@ export default function DividedLogin() {
         <div className="w-1/2 p-8 text-center bg-green-50 border-r border-gray-200">
           <h2 className="text-3xl font-bold text-green-700">For Providers</h2>
           <p className="mt-4 text-gray-600">Help reduce waste by sharing surplus food with those in need.</p>
-          <button onClick={() => handleLoginOpen("PROVIDER")} className="mt-4 px-6 py-3 bg-green-500 text-white font-bold rounded-lg">
+          <button onClick={() => handleLoginOpen("Provider")} className="mt-4 px-6 py-3 bg-green-500 text-white font-bold rounded-lg">
             Login as Provider
           </button>
         </div>
@@ -37,7 +37,7 @@ export default function DividedLogin() {
       </div>
       <Backdrop open={loginOpen} onClick={handleLoginClose}>
         <div onClick={(e) => e.stopPropagation()}>
-          <Login role={role} />
+          <Login role={role} />  {/* Pass role to Login component */}
         </div>
       </Backdrop>
     </div>

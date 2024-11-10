@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
-
 import Signup from "../components/Signup";
 import { Link } from "react-router-dom";
 
@@ -16,39 +15,34 @@ export default function Landing() {
   };
 
   return (
-    <div className="font-sans bg-gradient-to-br from-green-50 to-green-300 h-screen overflow-hidden p-8 flex flex-col justify-center items-center">
+    <div className="font-sans bg-gradient-to-br from-green-50 to-green-300 min-h-screen overflow-hidden p-8 flex flex-col justify-center items-center">
       {/* Navigation */}
       <nav className="flex justify-between items-center w-full max-w-5xl mb-4">
-       
-        <ul className="flex gap-8 text-gray-600 font-semibold text-lg">
-          <li className="cursor-pointer">Our Mission</li>
-          <li className="cursor-pointer">Solutions</li>
-          <li className="cursor-pointer">Get Involved</li>
-        </ul>
+        {/* Add navigation links here if needed */}
       </nav>
 
       {/* Main Content */}
-      <div className="flex justify-between items-center w-full max-w-5xl">
-        <div className="relative w-80">
+      <div className="flex flex-col lg:flex-row justify-between items-center w-full max-w-5xl">
+        <div className="relative w-full lg:w-1/2 mb-8 lg:mb-0 flex justify-center">
           <img
             src="./ffw.png"
             alt="Food Waste Platform"
-            className=" h-96"
+            className="w-full max-w-sm md:max-w-md lg:max-w-none h-auto"
           />
         </div>
 
-        <div className="max-w-xl ml-8">
-          <h1 className="text-5xl font-extrabold text-gray-800 mb-6 leading-tight">
+        <div className="max-w-xl lg:ml-8 text-center lg:text-left">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6 leading-tight">
             Join Us in Reducing{" "}
             <span className="text-green-500">Food Waste</span> and Making a
             Difference
           </h1>
-          <p className="text-xl text-gray-500 mb-8">
+          <p className="text-lg md:text-xl text-gray-500 mb-8">
             Optimize your food management with smart tracking, predictive
             insights, and sustainable practices to help minimize waste and
             support communities.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
             <button
               onClick={handleSignupOpen}
               className="px-6 py-3 border-2 border-green-500 text-green-500 font-bold rounded-lg hover:opacity-90 transition text-lg"
