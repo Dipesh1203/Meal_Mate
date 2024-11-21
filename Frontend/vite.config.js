@@ -10,6 +10,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: `${process.env.API}`,
+        changeOrigin: true,
         secure: false,
       },
     },
