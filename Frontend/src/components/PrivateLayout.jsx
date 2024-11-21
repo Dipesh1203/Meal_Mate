@@ -1,7 +1,7 @@
 // src/components/PrivateLayout.jsx
-import React from 'react';
-import Sidebar from './Sidebar';
-import { Outlet } from 'react-router-dom';
+import React from "react";
+import Sidebar from "./sidebar";
+import { Outlet } from "react-router-dom";
 
 const PrivateLayout = () => {
   return (
