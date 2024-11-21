@@ -1,12 +1,17 @@
 // Login.js
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 import CircularProgress from "@mui/material/CircularProgress";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-export default function Login({ role }) {  // Accept role as a prop
+export default function Login({ role }) {
+  // Accept role as a prop
   const [formData, setFormData] = useState({});
   const [err, setErr] = useState("");
   const dispatch = useDispatch();
@@ -31,17 +36,17 @@ export default function Login({ role }) {  // Accept role as a prop
       dispatch(signInStart());
 
       try {
-        const response = await fetch('http://localhost:5000/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
         });
 
         if (response.ok) {
           const data = await response.json();
           dispatch(signInSuccess(data.users)); // Dispatch user data to Redux
           toast.success("You're Successfully Logged In");
-          navigate('/');
+          navigate("/");
         } else {
           const errorData = await response.json();
           setErr(errorData.error || "An error occurred");
@@ -52,14 +57,15 @@ export default function Login({ role }) {  // Accept role as a prop
         setErr("Server error, please try again later.");
       }
     } else {
-      setErr('Please fill in all fields');
+      setErr("Please fill in all fields");
     }
   };
 
   return (
     <div className="flex items-center justify-center">
       <div className="bg-slate-50 text-slate-700 p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-3xl font-bold mb-2">Login as {role}</h2>  {/* Display role-specific header */}
+        <h2 className="text-3xl font-bold mb-2">Login as {role}</h2>{" "}
+        {/* Display role-specific header */}
         <p className="mb-4">Glad you're back!</p>
         <form>
           <div className="mb-4">
@@ -68,7 +74,7 @@ export default function Login({ role }) {  // Accept role as a prop
               type="text"
               className="mt-1 w-full px-4 py-2 border-2 border-gray-400 rounded-lg text-base focus:ring focus:ring-blue-400 focus:outline-none"
               placeholder="Email"
-              name='email'
+              name="email"
               onChange={handleChange}
             />
           </div>
@@ -78,17 +84,23 @@ export default function Login({ role }) {  // Accept role as a prop
               type="password"
               className="mt-1 w-full px-4 py-2 border-2 border-gray-400 rounded-lg text-base focus:ring focus:ring-blue-400 focus:outline-none"
               placeholder="Password"
-              name='password'
+              name="password"
               onChange={handleChange}
             />
           </div>
-          {err && <p className='text-red-500 text-xs mb-1 max-w-full break-words'>{err}</p>}
+          {err && (
+            <p className="text-red-500 text-xs mb-1 max-w-full break-words">
+              {err}
+            </p>
+          )}
           <div className="flex items-center mb-4">
             <input type="checkbox" id="rememberMe" className="mr-2" />
-            <label htmlFor="rememberMe" className="text-gray-700">Remember me</label>
+            <label htmlFor="rememberMe" className="text-gray-700">
+              Remember me
+            </label>
           </div>
           <button
-            type='submit'
+            type="submit"
             onClick={handleSubmit}
             className="w-full bg-gradient-to-r from-purple-400 to-blue-500 text-white p-2 rounded shadow flex justify-center items-center hover:opacity-95"
             disabled={loading}
@@ -96,7 +108,6 @@ export default function Login({ role }) {  // Accept role as a prop
             {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
           </button>
         </form>
-        
         <div className="mt-4 flex justify-between text-sm text-gray-500 gap-6">
           <a href="#">Terms & Conditions</a>
           <a href="#">Support</a>

@@ -65,25 +65,21 @@ export default function Signup() {
     ) {
       dispatch(signInStart());
       try {
-        const response = await axios.post(
-          "http://localhost:5000/auth/signup",
-          formData
-        );
-        
+        const response = await axios.post("/api/auth/signup", formData);
+
         if (response.status === 201) {
           dispatch(signInSuccess(response.data.users));
           toast.success("You are successfully signed up");
           console.log(entity);
-          
-          if(entity==="NGO"){
+
+          if (entity === "NGO") {
             navigate("profile/getMeals");
-          }else 
-          navigate("profile/analytics");
+          } else navigate("profile/analytics");
         }
       } catch (error) {
         setErr(error.response?.data?.error || "Server error");
         dispatch(signInFailure(error.message));
-        navigate("/landing")
+        navigate("/landing");
       }
     } else {
       setErr("Please fill in all required fields");

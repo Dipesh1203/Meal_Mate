@@ -23,7 +23,7 @@ const DonationsList = () => {
     const fetchDonations = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/provider_list/get/donation-meal/all"
+          "/api/provider_list/get/donation-meal/all"
         );
         setDonations(response.data);
         setLoading(false);
@@ -47,7 +47,7 @@ const DonationsList = () => {
     if (quantity && quantity > 0) {
       try {
         const response = await fetch(
-          "http://localhost:5000/reciver/donation-center/reserve_meal",
+          "/api/reciver/donation-center/reserve_meal",
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

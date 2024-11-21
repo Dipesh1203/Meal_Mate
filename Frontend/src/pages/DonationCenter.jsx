@@ -30,7 +30,7 @@ export default function DonationMeal() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:5000/provider/donation-center/donation-meal`,
+        `/api/provider/donation-center/donation-meal`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
