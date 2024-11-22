@@ -30,7 +30,7 @@ export default function DonationMeal() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `/api/provider/donation-center/donation-meal`,
+        `https://beta-8-virid.vercel.app/provider/donation-center/donation-meal`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

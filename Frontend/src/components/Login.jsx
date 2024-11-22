@@ -36,11 +36,15 @@ export default function Login({ role }) {
       dispatch(signInStart());
 
       try {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+          "https://beta-8-virid.vercel.app/auth/login",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          }
+        );
+        console.log(response);
 
         if (response.ok) {
           const data = await response.json();

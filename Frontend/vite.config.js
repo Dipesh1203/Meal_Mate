@@ -1,19 +1,21 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    outDir: "dist",
-  },
+  plugins: [react()],
   server: {
     proxy: {
       "/api": {
-        target: `${process.env.API}`,
+        target: `${import.meta.env.VITE_API}`, // Use environment variable with VITE_ prefix
+        rewrite: (path) => {
+          return path.replace(/^\/api/, "");
+        },
         changeOrigin: true,
-        secure: false,
+        secure: false, // Ensure this is necessary for your use case
+      },
+      build: {
+        outDir: "dist",
       },
     },
   },
-  plugins: [react()],
 });

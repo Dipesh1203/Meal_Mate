@@ -65,7 +65,10 @@ export default function Signup() {
     ) {
       dispatch(signInStart());
       try {
-        const response = await axios.post("/api/auth/signup", formData);
+        const response = await axios.post(
+          "https://beta-8-virid.vercel.app/auth/signup",
+          formData
+        );
 
         if (response.status === 201) {
           dispatch(signInSuccess(response.data.users));
