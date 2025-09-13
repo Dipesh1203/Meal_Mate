@@ -1,4 +1,4 @@
-# Meal-Mate
+# Meal-Mate | [Live Link](https://beta-8-lmld.vercel.app/login)
 
 Meal-Mate is a project designed to address the critical issue of food wastage in hotels and hostel messes while promoting sustainable practices. Built during the VersionBeta 7.0 Hackathon, the solution combines data analytics, real-time monitoring, and community engagement to create an efficient system for managing surplus food.
 
